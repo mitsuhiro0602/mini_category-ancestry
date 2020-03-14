@@ -21,12 +21,12 @@ ActiveRecord::Schema.define(version: 2020_03_13_093400) do
   end
 
   create_table "category_sizes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "categories_id"
-    t.bigint "items_sizes_id"
+    t.bigint "category_id"
+    t.bigint "items_size_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["categories_id"], name: "index_category_sizes_on_categories_id"
-    t.index ["items_sizes_id"], name: "index_category_sizes_on_items_sizes_id"
+    t.index ["category_id"], name: "index_category_sizes_on_category_id"
+    t.index ["items_size_id"], name: "index_category_sizes_on_items_size_id"
   end
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -37,13 +37,13 @@ ActiveRecord::Schema.define(version: 2020_03_13_093400) do
   end
 
   create_table "items_sizes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "size"
+    t.string "size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ancestry"
     t.index ["ancestry"], name: "index_items_sizes_on_ancestry"
   end
 
-  add_foreign_key "category_sizes", "categories", column: "categories_id"
-  add_foreign_key "category_sizes", "items_sizes", column: "items_sizes_id"
+  add_foreign_key "category_sizes", "categories"
+  add_foreign_key "category_sizes", "items_sizes"
 end
